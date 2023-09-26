@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform verificadorChao;
     [SerializeField] private LayerMask cenarioMask;
 
-    [SerializeField] private float alturaSalto =1f;
+    [SerializeField] private float alturaSalto;
     private float gravidade = -9.81f;
     private float velocidadeVertical;
     private void Awake()
