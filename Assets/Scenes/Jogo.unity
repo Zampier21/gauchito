@@ -410,6 +410,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -1455882244905981522, guid: 5d18df99a35042b4f860e295edfabacd,
         type: 3}
+      propertyPath: m_TagString
+      value: Footsteps/WOOD
+      objectReference: {fileID: 0}
+    - target: {fileID: -1455882244905981522, guid: 5d18df99a35042b4f860e295edfabacd,
+        type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -1276,7 +1281,6 @@ MonoBehaviour:
   sprintStepMultipler: 0.6
   footstepAuidoSource: {fileID: 0}
   woodClips: []
-  grassClips: []
   waterClips: []
   interactionRayPoint: {x: 0, y: 0, z: 0}
   intercationDistance: 0
@@ -1990,8 +1994,6 @@ MonoBehaviour:
   woodClips:
   - {fileID: 8300000, guid: 70a505fdb9a3be34cb0f4565b3318a5d, type: 3}
   - {fileID: 8300000, guid: 93bd77134a718af4cbb789f0699d1a6a, type: 3}
-  grassClips:
-  - {fileID: 8300000, guid: 1e2ad2a46a6f9fd409f9943fbf7e587c, type: 3}
   waterClips:
   - {fileID: 8300000, guid: fe0693f5abf01184dac2f6bf6714a741, type: 3}
   interactionRayPoint: {x: 0.5, y: 0.5, z: 0}

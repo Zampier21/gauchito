@@ -73,7 +73,6 @@ public class FirstPerson : MonoBehaviour
     [SerializeField] private float sprintStepMultipler = 0.6f;
     [SerializeField] private AudioSource footstepAuidoSource = default;
     [SerializeField] private AudioClip[] woodClips = default;
-    [SerializeField] private AudioClip[] grassClips = default;
     [SerializeField] private AudioClip[] waterClips = default;
     private float footstepTimer = 0;
     private float GetCurrentOffSet => isCrouching ? baseStepSpeed * crouchStepMultipler : isSprinting ? baseStepSpeed *  sprintStepMultipler : baseStepSpeed;
@@ -270,7 +269,7 @@ public class FirstPerson : MonoBehaviour
 
         if(footstepTimer <= 0)
         {
-            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 3))
+            if(Physics.Raycast(playerCamera.transform.position, Vector3.down, out RaycastHit hit, 2))
             {
                 switch(hit.collider.tag)
                 {
@@ -279,12 +278,6 @@ public class FirstPerson : MonoBehaviour
                         break;
                     case "Footsteps/WATER":
                         footstepAuidoSource.PlayOneShot(waterClips[Random.Range(0, waterClips.Length - 1)]);
-                        break;
-                    case "Footsteps/GRASS":
-                        footstepAuidoSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
-                        break;
-                    default:
-                        footstepAuidoSource.PlayOneShot(grassClips[Random.Range(0, grassClips.Length - 1)]);
                         break;
                 }
             }
