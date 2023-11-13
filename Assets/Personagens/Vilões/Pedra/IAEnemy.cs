@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class IAEnemy : MonoBehaviour
 {
     public NavMeshAgent enemy;
-    public Transform Player;
+    public Transform FirstPersonController;
     void Start()
     {
         enemy = GetComponent<NavMeshAgent>();
@@ -15,6 +15,6 @@ public class IAEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        enemy.SetDestination(Player.position);
+        enemy.SetDestination(FirstPersonController.position);
     }
 }

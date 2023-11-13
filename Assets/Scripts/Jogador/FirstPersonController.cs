@@ -98,7 +98,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private AudioClip[] woodClips = default;
     [SerializeField] private AudioClip[] grassClips = default;
     [SerializeField] private AudioClip[] waterClips = default;
-    private float footstepTimer = 0;
+    private float footstepTimer = 1;
     private float GetCurrentOffSet => isCrouching ? baseStepSpeed * crouchStepMultipler : isSprinting ? baseStepSpeed *  sprintStepMultipler : baseStepSpeed;
 
     // SLIDING PARAMETERS
