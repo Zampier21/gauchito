@@ -25,7 +25,6 @@ namespace DataBase
                 "id INT PRIMARY KEY UNIQUE," +
                 "maxHP INT NOT NULL," +
                 "currentHP INT NOT NULL," +
-                "defense INT NOT NULL," +
                 "positionX VARCHAR(36) NOT NULL," +
                 "positionY VARCHAR(36) NOT NULL," +
                 "positionZ VARCHAR(36) NOT NULL)";
@@ -54,9 +53,9 @@ namespace DataBase
         private void createPlayer()
         {
             //Create Player 1
-            Vector3 player1Position = PlayerWarpPositions.instance.getPlayer1CreatePosition().position;
-            CreateDatabase.instance.dbcommand.CommandText = "INSERT INTO Player(id, maxHP, currentHP, defense, positionX, positionY, positionZ) " +
-                "values (1, 100, 100, 0, '"+ player1Position.x + "', '" + player1Position.y + "', '" + player1Position.z + "')";
+            Vector3 player1Position = PlayerWarpPositions.instance.getPlayer1CreatePosition().position;layer(id, maxHP, currentHP, defense, 
+            CreateDatabase.instance.dbcommand.CommandText = "INSERT INTO PpositionX, positionY, positionZ) " +
+                "values (1, 100, 100, 0, '"+ player1Position.x + "', '" + player1Position.y + "', '" + player1Position.z + "', '");
             CreateDatabase.instance.dbcommand.ExecuteNonQuery();
         }
 
@@ -103,39 +102,6 @@ namespace DataBase
             return playerPosition;
         }
 
-        public int damageToPlayer(int damage, int playerId)
-        {
-            int currentHP = 0;
-
-            if (CreateDatabase.instance.dbconnection != null)
-            {
-                //Select current HP
-                CreateDatabase.instance.dbcommand.CommandText = "Select currentHP from Player where id = " + playerId + "";
-                IDataReader reader = CreateDatabase.instance.dbcommand.ExecuteReader();
-                if (reader.Read())
-                {
-                    currentHP = reader.GetInt32(0);
-                    reader.Close();
-                }
-                else
-                {
-                    reader.Close();
-                }
-
-                //Set new current HP
-                if (currentHP - damage < 0)
-                    currentHP = 0;
-                else
-                    currentHP -= damage;
-
-                //Update current HP
-                CreateDatabase.instance.dbcommand.CommandText = "Update Player set " +
-                            "currentHP = " + currentHP + " where Id = " + playerId + "";
-                CreateDatabase.instance.dbcommand.ExecuteNonQuery();
-            }
-
-            return currentHP;
-        }
 
         public int getMaxHP(int playerId)
         {
@@ -194,24 +160,6 @@ namespace DataBase
                 CreateDatabase.instance.dbcommand.CommandText = "Update Player set " +
                             "currentHP = " + maxHP + " where id = " + playerId + "";
                 CreateDatabase.instance.dbcommand.ExecuteNonQuery();
-            }
-        }
-
-        public int getDefense(int playerId)
-        {
-            CreateDatabase.instance.dbcommand.CommandText = "Select defense from Player where id = " + playerId + "";
-            IDataReader reader = CreateDatabase.instance.dbcommand.ExecuteReader();
-            if (reader.Read())
-            {
-                int value = reader.GetInt32(0);
-                reader.Close();
-
-                return value;
-            }
-            else
-            {
-                reader.Close();
-                return -1;
             }
         }
 
