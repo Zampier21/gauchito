@@ -9,6 +9,7 @@ public class WpController : MonoBehaviour
   public float AttackCooldown = 1.0f;
 
   public AudioClip SomEspeto;
+  public bool isAttacking = false;
 
   public void Update()
   {
@@ -22,6 +23,7 @@ public class WpController : MonoBehaviour
   }
   public void EspetoAttack()
     {
+        isAttacking = true;
         canAttack = false;
 
         Animator anim = Espeto.GetComponent<Animator>();
@@ -35,7 +37,14 @@ public class WpController : MonoBehaviour
 
     IEnumerator ResetAttackCoolDown()
     {
+        StartCoroutine(ResetAttackBool());
         yield return  new WaitForSeconds(AttackCooldown);
         canAttack = true;
+    }
+
+    IEnumerator ResetAttackBool()
+    {
+        yield return new WaitForSeconds(1.0f);
+        isAttacking = false;
     }
 }
