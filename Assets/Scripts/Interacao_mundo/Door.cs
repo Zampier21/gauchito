@@ -2,43 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour
+public class Door : Interactable
 {
-    public float interactionDistance;
-    public GameObject intText;
-    public string doorOpenAnimName, doorCloseAnimName;
-    void update()
-    {
-        Ray ray = new Ray(transform.position, transform.forward);
-        RaycastHit hit;
+    private bool isOpen = false;
+    private bool canBeInteractedWith = false;
+    private Animator anim;
 
-        if(Physics.Raycast(ray, out hit, interactionDistance))
-        {
-            if(hit.collider.gameObject.tag == "porteira")
-            {
-                GameObject doorParent = hit.collider.transform.root.gameObject;
-                Animator doorAnim = doorParent.GetComponent<Animator>();
-                intText.SetActive(true);
-                if(Input.GetKeyDown(KeyCode.E))
-                {
-                    if(doorAnim.GetCurrentAnimatorStateInfo(0).IsName(doorOpenAnimName))
-                    {
-                        doorAnim.ResetTrigger("open");
-                        doorAnim.SetTrigger("close");
-                    }
-                    if(doorAnim.GetCurrentAnimatorStateInfo(0).IsName(doorCloseAnimName))
-                    {
-                        doorAnim.ResetTrigger("close");
-                        doorAnim.SetTrigger("open");
-                    }
-                }
-            }else{
-                intText.SetActive(false);
-            }
-        }
-        else
-        {
-            intText.SetActive(false);
-        }
+    private void Start()
+    {
+        anim = GetComponent<Animator>();
     }
+   public override void OnFocus()
+   {
+
+   }
+     public override void OnInteract()
+   {
+    if(canBeInteractedWith)
+    {
+        isOpen = !isOpen;
+
+        Vector3 doorTransformDirection = transform.TransformDirection(Vector3.forward);
+        Vector3 playerTransformDirection = FirstPersonController.instance.transform.position - transform.position;
+        float dot = Vector3.Dot(doorTransformDirection, playerTransformDirection);
+
+        anim.SetFloat("dot",dot);
+        anim.SetBool("isOpen",isOpen);
+    }
+   }
+    public override void OnLoseFocus()
+   {
+    
+   }
 }
