@@ -382,7 +382,7 @@ public class FirstPersonController : MonoBehaviour
         if(regeneratingHealth != null)
             StopCoroutine(regeneratingHealth);
 
-        print("DEAD");
+        Debug.Log("DEAD");
     }
 
     private IEnumerator CrouchStand()
