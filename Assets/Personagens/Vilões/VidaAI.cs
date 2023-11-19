@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class VidaAI : MonoBehaviour
 {
+
+    public delegate void EnemyKilled();
+    public static event EnemyKilled OnEnemyKilled;
     public float maxHealth = 100;
     public float currentHealth;
 
@@ -29,6 +32,13 @@ public class VidaAI : MonoBehaviour
 
     public void Death()
     {
+
         Destroy(gameObject);
+
+        if(OnEnemyKilled != null)
+        {
+            OnEnemyKilled();
+        }
     }
+
 }
