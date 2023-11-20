@@ -380,9 +380,15 @@ public class FirstPersonController : MonoBehaviour
         currentHealth = 0;
 
         if(regeneratingHealth != null)
-            StopCoroutine(regeneratingHealth);
+        {
+             StopCoroutine(regeneratingHealth);
+        }
+           
 
-        Debug.Log("DEAD");
+        if(currentHealth <= 0)
+        {
+            Death();
+        }
     }
 
     private IEnumerator CrouchStand()
@@ -467,5 +473,11 @@ public class FirstPersonController : MonoBehaviour
             yield return timeToWait;
         }
         regeneratingStamina = null;
+    }
+
+    public void Death()
+    {
+        
+        Destroy(gameObject);
     }
 }

@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
   }
   public void Opcoes()
   {
-    pauseMenuUI.SetActive(false);
+    pauseMenuUI.SetActive(false); 
     OpcoesMenuPause.SetActive(true);
   }
   public void FecharOpcoes()

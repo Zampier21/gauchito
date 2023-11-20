@@ -101,7 +101,12 @@ public class InimigoAI : MonoBehaviour
         if (Physics.Raycast(walkPoint, -transform.up, 2f, whatisGround))
         {
             walkPointSet = true;
-            Debug.Log("Patrol!");
+            anim.SetBool("Follow",true);
+        }
+        else
+        {
+            walkPointSet = false;
+            anim.SetBool("Follow",false);
         }
     }
     private void AttackPlayer()
