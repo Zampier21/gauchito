@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class VidaStamina : MonoBehaviour
 {
-[SerializeField] private TextMeshProUGUI healthText = default;
-[SerializeField] private TextMeshProUGUI staminaText = default;
+[SerializeField] public Slider healthSlider;
+[SerializeField] public Slider staminaSlider;
 
 private void OnEnable(){
     FirstPersonController.OnDamage += UpdateHealth;
@@ -26,10 +27,12 @@ private void Start(){
 }
 private void UpdateHealth(float currentHealth)
 {
-    healthText.text = currentHealth.ToString("00");
+    int vida = Mathf.RoundToInt(currentHealth);
+    healthSlider.value = vida;
 }
 
 private void UpdateStamina(float currentStamina){
-staminaText.text = currentStamina.ToString("00");
+    int stamina = Mathf.RoundToInt(currentStamina);
+    staminaSlider.value = stamina;
 }
 }

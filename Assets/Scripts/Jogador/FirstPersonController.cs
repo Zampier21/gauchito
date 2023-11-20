@@ -6,12 +6,12 @@ using System;
 public class FirstPersonController : MonoBehaviour
 {
     public bool CanMove{get; private set;} = true;
-    private bool isSprinting => canSprint && Input.GetKey(sprintKey);
+    public bool isSprinting => canSprint && Input.GetKey(sprintKey);
     private bool ShouldJump => Input.GetKeyDown(jumpKey) && characterController.isGrounded;
     private bool ShouldCrouch => Input.GetKeyDown(crouchKey) && !duringCrounchAnimation && characterController.isGrounded;
 
     [Header("Functional Options")]
-    [SerializeField] private bool canSprint = true;
+    [SerializeField] public bool canSprint = true;
     [SerializeField] private bool canJump = true;
     [SerializeField] private bool canCrouch = true;
     [SerializeField] private bool canUseHeadBob = true;
@@ -30,7 +30,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("Movement Parameters")]
     [SerializeField] private float walkSpeed = 3.0f;
-    [SerializeField] private float sprintSpeed = 6.0f;
+    [SerializeField] public float sprintSpeed = 6.0f;
     [SerializeField] private float crouchSpeed = 1.5f;
     [SerializeField] private float slopeSpeed = 8f;
 

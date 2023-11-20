@@ -17,7 +17,8 @@ public class InimigoAI : MonoBehaviour
     bool walkPointSet;
     [SerializeField]
     public float walkRange;
-
+    //Animação
+    public Animator anim;
     //para o inimigo atacar
     [SerializeField]
     private float attackSpeed;
@@ -27,13 +28,17 @@ public class InimigoAI : MonoBehaviour
     public float attackRange, sightRange;
     public bool playerinSight, playerinAttackRange;
 
+    //Projeteis
+    [SerializeField] public GameObject projetilPrefab;
+    public Transform firePoint;
+    public float forcaProjetil = 5;
+
     private void Awake()
     {
         //funções para quando instanciar um inimigo.
         //ira automaticamente detectar o player, e adicionar o navmesh ao script
         /////MUDAR ESQUELETO PARA O NOME DO PLAYER NO FUTURO!
         player = GameObject.Find("FirstPersonController").transform;
-       
         agentNav = GetComponent<NavMeshAgent>();
     }
 
@@ -63,7 +68,7 @@ public class InimigoAI : MonoBehaviour
     private void ChasePlayer()
     {
         agentNav.SetDestination(player.position);
-        Debug.Log("Chasing player!");
+        anim.SetBool("Follow",true);
     }
     private void Patrol()
     {
@@ -76,6 +81,7 @@ public class InimigoAI : MonoBehaviour
         if(walkPointSet)
         {
             agentNav.SetDestination(walkPoint);
+            anim.SetBool("Follow",false);
         }
         //checa a distancia, e se for maior que o destino, não pode mais andar
         Vector3 distanceWalkPoint = transform.position - walkPoint;
@@ -101,18 +107,19 @@ public class InimigoAI : MonoBehaviour
     private void AttackPlayer()
     {
         //faz o inimigo não se mecher, para atacar o jogador.
-        agentNav.SetDestination(transform.position);
-        transform.LookAt(player);
-        if(!hasAttacked)
-        {
-
-            //seu codigo de dano vai aqui !!
-            //a não ser que o dano seja diretamente feito usando colliders.
-            Debug.Log("Atacando!");
-            ////////////////////////////////////////////////
-            hasAttacked = true;
-            Invoke(nameof(ResetAttack), attackSpeed);
-        }
+    agentNav.SetDestination(transform.position);
+    transform.LookAt(player);
+    if(!hasAttacked)
+    {
+        //seu codigo de dano vai aqui !!
+        //a não ser que o dano seja diretamente feito usando colliders.
+        anim.SetTrigger("Hit");
+        GameObject projetil = Instantiate(projetilPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody projetilRB = projetil.GetComponent<Rigidbody>();
+        projetilRB.AddForce(firePoint.up * forcaProjetil);
+        hasAttacked = true;
+        Invoke(nameof(ResetAttack), attackSpeed);
+    }
     }
 
     private void ResetAttack()

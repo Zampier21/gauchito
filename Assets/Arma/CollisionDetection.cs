@@ -14,10 +14,6 @@ public class CollisionDetection : MonoBehaviour
     {
         other.GetComponent<Animator>().SetTrigger("Hit");
         other.GetComponent<VidaAI>().TakeDamage(damage);
-
-       /*  Instantiate(hitPartcile, new Vector3(other.transform.position.x, 
-        transform.position.y, other.transform.position.z), 
-        other.transform.rotation); */
     }
    }
 }

@@ -9,7 +9,7 @@ public class VidaAI : MonoBehaviour
     public static event EnemyKilled OnEnemyKilled;
     public float maxHealth = 100;
     public float currentHealth;
-
+    public GameObject prefabOnDeath;
 
     public void Awake()
     {
@@ -18,7 +18,6 @@ public class VidaAI : MonoBehaviour
     public void TakeDamage(float dano)
     {
         currentHealth -= dano;
-        Debug.Log(currentHealth);
         if(currentHealth <= 0)
         {
             Death();
@@ -32,7 +31,7 @@ public class VidaAI : MonoBehaviour
 
     public void Death()
     {
-
+        Instantiate(prefabOnDeath,transform.position, transform.rotation);
         Destroy(gameObject);
 
         if(OnEnemyKilled != null)
@@ -40,5 +39,4 @@ public class VidaAI : MonoBehaviour
             OnEnemyKilled();
         }
     }
-
 }
