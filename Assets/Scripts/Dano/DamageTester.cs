@@ -24,7 +24,7 @@ public class DamageTester : MonoBehaviour
     {
       if(canAttack == true)
       {
-        FirstPersonController.OnTakeDamage(50);
+        FirstPersonController.OnTakeDamage(20);
         coldownAttack = 1f;
       }
     }

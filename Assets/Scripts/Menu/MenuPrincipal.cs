@@ -12,6 +12,8 @@ public class MenuPrincipal : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene("Jogo");
+        AudioManager.instance.Stop("FundoMenu");
+        AudioManager.instance.Stop("Fogueira");
     }
 
     public void Options()

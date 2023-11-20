@@ -59,6 +59,6 @@ public class PauseMenu : MonoBehaviour
 
   public void Reniciar()
   {
-    SceneManager.LoadScene("Jogo");
+      SceneManager.LoadScene("Menu-principal");
   }
 }
