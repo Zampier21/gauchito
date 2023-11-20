@@ -504,6 +504,6 @@ public class FirstPersonController : MonoBehaviour
 
     public void Restart()
     {
-         SceneManager.LoadScene("Menu-principal");
+        SceneManager.LoadScene("Menu-principal");
     }
 }

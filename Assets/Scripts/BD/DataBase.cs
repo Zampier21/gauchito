@@ -1,23 +1,24 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Data;
 using Mono.Data.Sqlite;
 
+
 public class DataBase : MonoBehaviour
 {
     public string databaseName = "AudioData.db";
-
-    public void Start()
+public void Start()
+{
+    try
     {
         string connection = "URI=file:" + Application.dataPath + "/" + databaseName;
         using (IDbConnection dbConnection = new SqliteConnection(connection))
         {
             dbConnection.Open();
-            string sql = "CREATE TABLE IF NOT EXISTS Audio (" +
-                   "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-                   "name TEXT NOT NULL," +
-                   "file TEXT NOT NULL);";
+
+            string sql = "CREATE TABLE IF NOT EXISTS Audio (name TEXT UNIQUE, file TEXT, volume REAL)";
 
             using (IDbCommand dbCmd = dbConnection.CreateCommand())
             {
@@ -33,16 +34,20 @@ public class DataBase : MonoBehaviour
                 IDataReader reader = dbCmd.ExecuteReader();
                 while (reader.Read())
                 {
-                    string name = reader.GetString(reader.GetOrdinal("NAME"));
-                    float volume = reader.GetFloat(reader.GetOrdinal("VOLUME"));
+                    string name = reader.GetString(reader.GetOrdinal("name"));
+                    float volume = reader.GetFloat(reader.GetOrdinal("volume"));
 
                     AudioManager.instance.SetVolume(name, volume);
                 }
                 reader.Close();
             }
         }
-        InsertAudioData("Music", @"C:\Users\Alemao\Documents\GitHub\gauchito\Assets\Scripts\Audio\FundoMenu.mp3", 0.5f);
     }
+    catch (Exception e)
+    {
+        Debug.LogError("Erro ao abrir a conexão com o banco de dados: " + e.Message);
+    }
+}
 public void InsertAudioData(string name, string file, float volume)
 {
     string connection = "URI=file:" + Application.dataPath + "/" + databaseName;

@@ -111,7 +111,7 @@
     },
     "com.unity.render-pipelines.high-definition-config": {
       "version": "12.1.11",
-      "depth": 0,
+      "depth": 1,
       "source": "builtin",
       "dependencies": {
         "com.unity.render-pipelines.core": "12.1.11"

@@ -2025,7 +2025,6 @@ GameObject:
   - component: {fileID: 1051033313}
   - component: {fileID: 1051033312}
   - component: {fileID: 1051033316}
-  - component: {fileID: 1051033317}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2131,19 +2130,6 @@ MonoBehaviour:
   MenuInicial: {fileID: 1881583392}
   Opcoes: {fileID: 198808795}
   AbrirCreditos: {fileID: 1412174341}
---- !u!114 &1051033317
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1051033311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd448abbf9329d343b9f2b930bcb70a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  databaseName: AudioData.db
 --- !u!1 &1075697659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2433,6 +2419,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1275176115}
   - component: {fileID: 1275176117}
+  - component: {fileID: 1275176118}
   m_Layer: 0
   m_Name: Musica
   m_TagString: Untagged
@@ -2469,17 +2456,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sounds:
   - name: FundoMenu
-    clip: {fileID: 8300000, guid: 4331c0d5115f7754bbcbf7d07dbd28e2, type: 3}
-    volume: 0.472
+    clip: {fileID: 8300000, guid: a908a22b8f72a8346aea21268f0b7f5e, type: 3}
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Fogueira
     clip: {fileID: 8300000, guid: 528767c2a933f6449a6044fa738bd48b, type: 3}
-    volume: 0.404
+    volume: 0.5
     pitch: 1
     loop: 0
     source: {fileID: 0}
+--- !u!114 &1275176118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1275176113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd448abbf9329d343b9f2b930bcb70a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  databaseName: AudioData.db
 --- !u!1 &1281991773
 GameObject:
   m_ObjectHideFlags: 0
@@ -2783,7 +2783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -3, y: -7.2005005}
+  m_AnchoredPosition: {x: -3, y: -7.2004395}
   m_SizeDelta: {x: -80.9208, y: -25.156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1418457524
@@ -3411,7 +3411,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1.3165283, y: 0}
+  m_AnchoredPosition: {x: -1.3164062, y: 0}
   m_SizeDelta: {x: -2.6329, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2042213790
@@ -3635,7 +3635,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2079731070}
   - component: {fileID: 2079731071}
-  - component: {fileID: 2079731072}
   m_Layer: 5
   m_Name: volumeSlider
   m_TagString: Untagged
@@ -3717,32 +3716,7 @@ MonoBehaviour:
   m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1051033317}
-        m_TargetAssemblyTypeName: DataBase, Assembly-CSharp
-        m_MethodName: Start
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &2079731072
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2079731069}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94b4253c0d403b548a544ad74dfff658, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _slider: {fileID: 2079731071}
+      m_Calls: []
 --- !u!1 &2121020983
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,7 @@ public class WpController : MonoBehaviour
 
   public AudioClip SomEspeto;
   public bool isAttacking = false;
+  public AudioSource source;
 
   public void Update()
   {

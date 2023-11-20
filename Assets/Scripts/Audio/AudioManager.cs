@@ -1,7 +1,7 @@
 using UnityEngine.Audio;
 using System;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
@@ -32,8 +32,8 @@ public class AudioManager : MonoBehaviour
     }
 
     void Start(){
-        Play("FundoMenu");
-        Play("Fogueira");
+            Play("FundoMenu");
+            Play("Fogueira");
     }
 
 
