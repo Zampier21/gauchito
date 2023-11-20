@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class FirstPersonController : MonoBehaviour
 {
@@ -101,6 +103,10 @@ public class FirstPersonController : MonoBehaviour
     private float footstepTimer = 1;
     private float GetCurrentOffSet => isCrouching ? baseStepSpeed * crouchStepMultipler : isSprinting ? baseStepSpeed *  sprintStepMultipler : baseStepSpeed;
 
+    public bool isDead;
+    public GameObject deathCanvas;
+    public Button restartButton;
+
     // SLIDING PARAMETERS
 
     private Vector3 hitPointNormal;
@@ -190,6 +196,10 @@ public class FirstPersonController : MonoBehaviour
             }
             if(UseStamina)
                 HandleStamina();
+
+            if (isDead)
+                deathCanvas.SetActive(true);
+        
 
 
             ApplyFinalMovements();
@@ -377,47 +387,47 @@ public class FirstPersonController : MonoBehaviour
 
     private void KillPlayer()
     {
-        currentHealth = 0;
+          currentHealth = 0;
 
-        if(regeneratingHealth != null)
-        {
-             StopCoroutine(regeneratingHealth);
-        }
+    if(regeneratingHealth != null)
+    {
+         StopCoroutine(regeneratingHealth);
+    }
            
 
-        if(currentHealth <= 0)
-        {
-            Death();
-        }
+    if(currentHealth <= 0)
+    {
+        Death();
+    }
     }
 
     private IEnumerator CrouchStand()
     {
         if(isCrouching && Physics.Raycast(playerCamera.transform.position, Vector3.up, 1f))
-            yield break;
+        yield break;
 
-        duringCrounchAnimation = true;
+    duringCrounchAnimation = true;
 
-        float timeElapsed = 0;
-        float targetHeight = isCrouching ? standingHeight : crouchHeight;
-        float currentHeight = characterController.height;
-        Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
-        Vector3 currentCenter = characterController.center;
+    float timeElapsed = 0;
+    float targetHeight = isCrouching ? standingHeight : crouchHeight;
+    float currentHeight = characterController.height;
+    Vector3 targetCenter = isCrouching ? standingCenter : crouchingCenter;
+    Vector3 currentCenter = characterController.center;
 
-        while(timeElapsed < timeToCrouch)
-        {
-            characterController.height = Mathf.Lerp(currentHeight, targetHeight,timeElapsed/timeToCrouch);
-            characterController.center = Vector3.Lerp(currentCenter,targetCenter,timeElapsed/timeToCrouch);
-            timeElapsed += Time.deltaTime;
-            yield return null;
-        }
-        
-        characterController.height = targetHeight;
-        characterController.center = targetCenter;
+    while(timeElapsed < timeToCrouch)
+    {
+        characterController.height = Mathf.Lerp(currentHeight, targetHeight,timeElapsed/timeToCrouch);
+        characterController.center = Vector3.Lerp(currentCenter,targetCenter,timeElapsed/timeToCrouch);
+        timeElapsed += Time.deltaTime;
+        yield return null;
+    }
 
-        isCrouching = !isCrouching;
+    characterController.height = targetHeight;
+    characterController.center = targetCenter;
 
-        duringCrounchAnimation = false;
+    isCrouching = !isCrouching;
+
+    duringCrounchAnimation = false;
     }
 
     private IEnumerator ToggleZoom(bool isEnter)
@@ -439,20 +449,24 @@ public class FirstPersonController : MonoBehaviour
 
     private IEnumerator RegenerateHealth()
     {
-        yield return new WaitForSeconds(timeBeforeRegenStarts);
-        WaitForSeconds timeToWait = new WaitForSeconds(healTimeIncrement);
+       yield return new WaitForSeconds(timeBeforeRegenStarts);
+    WaitForSeconds timeToWait = new WaitForSeconds(healTimeIncrement);
 
-        while(currentHealth < maxHealth)
-        {
-            currentHealth += healthValueIncrement;
+    while(currentHealth < maxHealth)
+    {
+        currentHealth += healthValueIncrement;
 
-            if(currentHealth > maxHealth)
-                currentHealth = maxHealth;
-            
-            OnHeal?.Invoke(currentHealth);
-            yield return timeToWait;
-        }
-        regeneratingHealth = null;
+        if(currentHealth > maxHealth)
+            currentHealth = maxHealth;
+
+        OnHeal?.Invoke(currentHealth);
+        yield return timeToWait;
+    }
+
+    if(currentHealth > maxHealth)
+        currentHealth = maxHealth;
+
+    regeneratingHealth = null;
     }
 
     private IEnumerator RegenerateStamina()
@@ -477,7 +491,19 @@ public class FirstPersonController : MonoBehaviour
 
     public void Death()
     {
-        
-        Destroy(gameObject);
+        if(currentHealth <=0)
+        {
+        isDead = true;
+        deathCanvas.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+        }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("Jogo");
     }
 }
